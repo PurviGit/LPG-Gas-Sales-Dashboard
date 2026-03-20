@@ -106,7 +106,7 @@ Sales_Transactions  →  Monthly_Targets  (on Zone + Month)
 
 ## How to Open Locally
 
-1. Download `LPG_Dashboard.pbix`
+1. Download `LPG Gas Sales Dashboard.pbix`
 2. Open in **Power BI Desktop** (free download at powerbi.microsoft.com)
 3. Data loads automatically from the Excel file
 4. All slicers and visuals are interactive
