@@ -1,46 +1,477 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>LPG Gas Sales Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LPG Gas Sales Dashboard — Purvi Porwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#070C18;font-family:Inter,sans-serif;color:#e2e8f0}
-.hero{text-align:center;padding:40px 20px 20px}
-h1{font-size:28px;color:#93C5FD;margin-bottom:8px}
-p{color:#64748b;font-size:14px}
-.img-wrap{max-width:1100px;margin:20px auto;padding:0 20px}
-img{width:100%;border-radius:12px;border:1px solid #1e3a5f}
-.stats{display:flex;justify-content:center;gap:40px;padding:30px;flex-wrap:wrap}
-.stat{text-align:center}
-.stat-val{font-size:28px;font-weight:800;color:#93C5FD}
-.stat-lbl{font-size:12px;color:#475569;margin-top:4px}
-.links{text-align:center;padding:20px;display:flex;gap:16px;justify-content:center}
-.btn{padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;
-     text-decoration:none;cursor:pointer}
-.btn1{background:#2563EB;color:#fff}
-.btn2{background:#1e293b;color:#93C5FD;border:1px solid #2563EB}
-.tools{text-align:center;padding:10px;color:#475569;font-size:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#070C18;font-family:'Inter',sans-serif;color:#e2e8f0;min-height:100vh}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,12,24,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #1B3A6B;
+  padding:12px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-fire{font-size:20px}
+.nav-name{font-size:14px;font-weight:700;color:#F1F5F9}
+.nav-sub{font-size:10px;color:#475569;font-family:'JetBrains Mono',monospace}
+.nav-links{display:flex;gap:8px}
+.nav-btn{
+  padding:7px 16px;border-radius:7px;font-size:11px;font-weight:700;
+  text-decoration:none;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;
+  border:none;
+}
+.nb1{background:#2563EB;color:#fff}
+.nb1:hover{background:#1D4ED8}
+.nb2{background:#111827;color:#93C5FD;border:1px solid #1B3A6B}
+.nb2:hover{border-color:#2563EB}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:64px 40px 48px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 900px 500px at 50% 0%,rgba(37,99,235,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.25);
+  padding:5px 14px;border-radius:100px;
+  font-size:10px;font-weight:700;color:#93C5FD;
+  letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#3B82F6;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:42px;font-weight:800;
+  background:linear-gradient(135deg,#F1F5F9 0%,#93C5FD 50%,#6EE7B7 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px;
+}
+.hero-sub{font-size:14px;color:#475569;margin-bottom:8px;line-height:1.7}
+.tech-stack{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;flex-wrap:wrap;margin-bottom:32px;margin-top:16px;
+}
+.tech{
+  background:#111827;border:1px solid #1B3A6B;
+  padding:5px 13px;border-radius:100px;
+  font-size:11px;font-weight:600;color:#94A3B8;
+}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hbtn{
+  padding:11px 24px;border-radius:9px;font-size:13px;font-weight:700;
+  text-decoration:none;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:7px;
+}
+.hb1{background:#2563EB;color:#fff;box-shadow:0 0 24px rgba(37,99,235,0.25)}
+.hb1:hover{background:#1D4ED8;transform:translateY(-1px)}
+.hb2{background:#111827;color:#E2E8F0;border:1px solid #1B3A6B}
+.hb2:hover{border-color:#2563EB;color:#93C5FD}
+
+/* KPI STRIP */
+.kpi-section{padding:0 40px 48px}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1100px;margin:0 auto}
+.kpi{
+  background:#0D1425;border:1px solid #1B3A6B;border-radius:12px;
+  padding:18px 20px;position:relative;overflow:hidden;text-align:center;
+}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.kpi.b::before{background:linear-gradient(90deg,#2563EB,#38BDF8)}
+.kpi.g::before{background:linear-gradient(90deg,#10B981,#34D399)}
+.kpi.a::before{background:linear-gradient(90deg,#F59E0B,#FCD34D)}
+.kpi.r::before{background:linear-gradient(90deg,#EF4444,#F87171)}
+.kpi.p::before{background:linear-gradient(90deg,#8B5CF6,#C4B5FD)}
+.kpi-lbl{font-size:9px;font-weight:700;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px}
+.kpi-val{font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
+.kpi.b .kpi-val{color:#93C5FD}
+.kpi.g .kpi-val{color:#6EE7B7}
+.kpi.a .kpi-val{color:#FCD34D}
+.kpi.r .kpi-val{color:#FCA5A5}
+.kpi.p .kpi-val{color:#C4B5FD}
+.kpi-delta{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;display:inline-block}
+.up{background:rgba(16,185,129,.12);color:#34D399}
+.dn{background:rgba(239,68,68,.12);color:#F87171}
+
+/* SECTION TITLE */
+.section{max-width:1100px;margin:0 auto;padding:0 40px 40px}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:#334155;display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.sec-label::after{content:'';flex:1;height:1px;background:#131E35}
+
+/* DASHBOARD IMAGE */
+.dash-wrap{
+  max-width:1200px;margin:0 auto;padding:0 40px 48px;
+}
+.dash-img-container{
+  border-radius:14px;overflow:hidden;
+  border:1px solid #1B3A6B;
+  box-shadow:0 0 60px rgba(37,99,235,0.12);
+  position:relative;
+}
+.dash-img-container img{width:100%;display:block}
+.dash-overlay-label{
+  position:absolute;top:12px;left:12px;
+  background:rgba(7,12,24,0.85);border:1px solid #1B3A6B;
+  padding:5px 12px;border-radius:6px;
+  font-size:10px;font-weight:700;color:#93C5FD;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* INSIGHTS GRID */
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ins{
+  background:#0D1425;border:1px solid #1B3A6B;border-radius:12px;
+  padding:16px 18px;display:flex;gap:12px;align-items:flex-start;
+}
+.ins-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.ins-title{font-size:12px;font-weight:700;margin-bottom:5px}
+.ins-desc{font-size:11px;color:#475569;line-height:1.7}
+
+/* WHAT I DID */
+.steps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.step-card{
+  background:#0D1425;border:1px solid #1B3A6B;border-radius:12px;
+  padding:16px 18px;display:flex;gap:12px;
+}
+.step-num{
+  width:28px;height:28px;border-radius:7px;background:#1D4ED8;
+  font-size:12px;font-weight:800;color:#fff;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.step-title{font-size:12px;font-weight:700;color:#E2E8F0;margin-bottom:4px}
+.step-desc{font-size:11px;color:#475569;line-height:1.6}
+
+/* DAX MEASURES */
+.dax-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dax-card{
+  background:#070C18;border:1px solid #1B3A6B;border-radius:10px;padding:14px;
+}
+.dax-name{font-size:11px;font-weight:700;color:#93C5FD;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.dax-code{font-size:10px;color:#475569;font-family:'JetBrains Mono',monospace;line-height:1.6;background:#0D1425;padding:8px 10px;border-radius:6px}
+
+/* FILES */
+.files-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.file-card{
+  background:#0D1425;border:1px solid #1B3A6B;border-radius:10px;
+  padding:14px 16px;text-align:center;
+}
+.file-icon{font-size:24px;margin-bottom:8px}
+.file-name{font-size:11px;font-weight:700;color:#E2E8F0;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.file-desc{font-size:10px;color:#475569}
+.file-btn{
+  display:inline-block;margin-top:10px;background:#111827;
+  border:1px solid #1B3A6B;color:#93C5FD;
+  padding:4px 12px;border-radius:5px;font-size:10px;font-weight:700;
+  text-decoration:none;transition:.2s;
+}
+.file-btn:hover{border-color:#2563EB}
+
+/* RESUME SECTION */
+.resume-box{
+  background:#0D1425;border:1px solid #1B3A6B;border-radius:12px;
+  padding:20px 24px;max-width:700px;
+}
+.resume-title{font-size:13px;font-weight:700;color:#E2E8F0;margin-bottom:4px}
+.resume-tools{font-size:11px;color:#475569;margin-bottom:14px}
+.resume-bullet{display:flex;gap:8px;margin-bottom:7px;font-size:12px;color:#94A3B8;line-height:1.6}
+.resume-bullet::before{content:'•';color:#2563EB;flex-shrink:0;font-size:14px;line-height:1.4}
+
+/* FOOTER */
+footer{
+  background:#0D1425;border-top:1px solid #1B3A6B;
+  padding:20px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.footer-left{font-size:11px;color:#334155;font-family:'JetBrains Mono',monospace}
+.footer-right{display:flex;gap:12px}
+.footer-link{font-size:11px;color:#475569;text-decoration:none;transition:.2s}
+.footer-link:hover{color:#93C5FD}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .ins-grid,.steps-grid,.dax-grid,.files-grid{grid-template-columns:1fr}
+  .hero h1{font-size:28px}
+  nav{padding:12px 20px}
+  .dash-wrap,.kpi-section,.section{padding-left:16px;padding-right:16px}
+}
 </style>
 </head>
 <body>
-<div class="hero">
-  <h1>🔥 LPG Gas Sales Dashboard</h1>
-  <p>Business Intelligence · Power BI · DAX · Excel · Power Query</p>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-fire">🔥</div>
+    <div>
+      <div class="nav-name">Purvi Porwal — Data Analyst Portfolio</div>
+      <div class="nav-sub">Power BI · DAX · Excel · Power Query · SQL</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-btn nb2" href="LPG_Dashboard.pbix" download>⬇ Download .pbix</a>
+    <a class="nav-btn nb1" href="https://github.com/purviporwal09/lpg-gas-sales-dashboard" target="_blank">GitHub Repo →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><div class="badge-dot"></div>Portfolio Project · FY 2024-25</div>
+  <h1>LPG Gas Sales<br>Analytics Dashboard</h1>
+  <div class="hero-sub">End-to-end Business Intelligence dashboard built in Power BI<br>covering ₹149.83M revenue across 6 zones, 10 dealers and 3 customer segments</div>
+  <div class="tech-stack">
+    <span class="tech">Power BI Desktop</span>
+    <span class="tech">DAX</span>
+    <span class="tech">Power Query</span>
+    <span class="tech">Excel</span>
+    <span class="tech">Data Modelling</span>
+    <span class="tech">Business Intelligence</span>
+  </div>
+  <div class="hero-btns">
+    <a class="hbtn hb1" href="#dashboard">View Dashboard ↓</a>
+    <a class="hbtn hb2" href="LPG_Sales_Data.xlsx" download>⬇ Download Dataset</a>
+    <a class="hbtn hb2" href="LPG_Dashboard.pbix" download>⬇ Download .pbix</a>
+  </div>
+</section>
+
+<!-- KPI STRIP -->
+<div class="kpi-section">
+  <div class="kpi-grid">
+    <div class="kpi b">
+      <div class="kpi-lbl">Total Revenue</div>
+      <div class="kpi-val">₹149.83M</div>
+      <span class="kpi-delta up">▲ +12.4% YoY</span>
+    </div>
+    <div class="kpi g">
+      <div class="kpi-lbl">Cylinders Sold</div>
+      <div class="kpi-val">81,473</div>
+      <span class="kpi-delta up">▲ All SKUs</span>
+    </div>
+    <div class="kpi a">
+      <div class="kpi-lbl">Gross Margin %</div>
+      <div class="kpi-val">26.06%</div>
+      <span class="kpi-delta up">▲ Strong</span>
+    </div>
+    <div class="kpi r">
+      <div class="kpi-lbl">SLA %</div>
+      <div class="kpi-val">85.49%</div>
+      <span class="kpi-delta dn">▼ Needs work</span>
+    </div>
+    <div class="kpi p">
+      <div class="kpi-lbl">Active Dealers</div>
+      <div class="kpi-val">10</div>
+      <span class="kpi-delta up">▲ All active</span>
+    </div>
+  </div>
 </div>
-<div class="img-wrap">
-  <img src="dashboard.png" alt="LPG Gas Sales Dashboard">
+
+<!-- DASHBOARD SCREENSHOT -->
+<div class="dash-wrap" id="dashboard">
+  <div class="sec-label" style="max-width:100%;margin-bottom:16px">Dashboard Preview</div>
+  <div class="dash-img-container">
+    <div class="dash-overlay-label">Power BI Desktop · FY 2024-25</div>
+    <img src="dashboard.png" alt="LPG Gas Sales Dashboard - Power BI">
+  </div>
 </div>
-<div class="stats">
-  <div class="stat"><div class="stat-val">₹149.83M</div><div class="stat-lbl">Total Revenue</div></div>
-  <div class="stat"><div class="stat-val">81,473</div><div class="stat-lbl">Cylinders Sold</div></div>
-  <div class="stat"><div class="stat-val">26.06%</div><div class="stat-lbl">Gross Margin</div></div>
-  <div class="stat"><div class="stat-val">10</div><div class="stat-lbl">Active Dealers</div></div>
-  <div class="stat"><div class="stat-val">6</div><div class="stat-lbl">DAX Measures</div></div>
+
+<!-- BUSINESS INSIGHTS -->
+<div class="section">
+  <div class="sec-label">Business Insights Found</div>
+  <div class="ins-grid">
+    <div class="ins">
+      <div class="ins-icon">📈</div>
+      <div>
+        <div class="ins-title" style="color:#6EE7B7">West Zone Top Performer</div>
+        <div class="ins-desc">West zone leads all regions at ₹27M revenue. Consistently outperforms next best zone (North at ₹26M) across all quarters.</div>
+      </div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">❄️</div>
+      <div>
+        <div class="ins-title" style="color:#93C5FD">Winter Demand Spike</div>
+        <div class="ins-desc">Domestic segment shows 20–25% volume increase during Nov–Feb winter months. Inventory pre-positioning recommended by October.</div>
+      </div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">⚠️</div>
+      <div>
+        <div class="ins-title" style="color:#FCD34D">SLA Risk — Central Zone</div>
+        <div class="ins-desc">Central zone SLA drops to ~80%, below the 85% threshold. 2–3 dealers consistently underperform. Route optimization needed.</div>
+      </div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">🏭</div>
+      <div>
+        <div class="ins-title" style="color:#C4B5FD">Industrial SKU — Highest Unit Revenue</div>
+        <div class="ins-desc">47.5 kg industrial cylinders generate highest revenue per unit despite lower volume. Prioritising this segment improves margins.</div>
+      </div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">🏙️</div>
+      <div>
+        <div class="ins-title" style="color:#6EE7B7">City-Level Concentration</div>
+        <div class="ins-desc">Jaipur (₹8.4M), Indore (₹7.6M) and Delhi (₹7.5M) are the top 3 cities by revenue — combined they make up 15% of total sales.</div>
+      </div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">📊</div>
+      <div>
+        <div class="ins-title" style="color:#FCA5A5">Revenue Growth Signal</div>
+        <div class="ins-desc">Revenue grew 12% YoY across all zones. Northeast shows fastest growth rate despite smallest base — expansion opportunity.</div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="links">
-  <a class="btn btn2" href="LPG_Sales_Data.xlsx" download>⬇ Download Dataset</a>
-  <a class="btn btn2" href="LPG_Dashboard.pbix" download>⬇ Download .pbix File</a>
+
+<!-- WHAT I DID -->
+<div class="section">
+  <div class="sec-label">How I Built This — Step by Step</div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Data Creation & Structure</div>
+        <div class="step-desc">Generated 3,287 realistic transaction records across 4 related tables — Sales Transactions, Dealer Master, Monthly Targets and Product Master — using real LPG business logic.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Power Query — Data Cleaning</div>
+        <div class="step-desc">Loaded all 4 Excel sheets into Power Query. Changed column data types, removed nulls, renamed columns to remove underscores and standardised date format to YYYY-MM-DD.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Data Modelling — Table Relationships</div>
+        <div class="step-desc">Created relationships between tables in Model View: Sales → Dealers on Dealer_ID, Sales → Products on Product_SKU, Sales → Targets on Zone and Month fields.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">DAX Measures — 6 Calculations</div>
+        <div class="step-desc">Wrote 6 custom DAX measures including Total Revenue, Total Cylinders, Gross Profit, Gross Margin %, SLA % and Revenue vs Target using SUM, DIVIDE, COUNTROWS and FILTER functions.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Dashboard Design — 9 Visuals</div>
+        <div class="step-desc">Built 9 visuals: 5 KPI cards, line chart with 3 customer type lines, donut chart for product mix, horizontal bar chart for zones with individual colors, dealer table, gauge chart and city map.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Theme & Formatting</div>
+        <div class="step-desc">Applied custom dark navy JSON theme with hex colors #070C18 for background, #2563EB for primary accent and unique color per zone. Added Business Insights text box with key findings.</div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="tools">Built with: Power BI Desktop · Power Query · DAX · Excel · 3,287 rows · 4 tables · 6 measures</div>
+
+<!-- DAX MEASURES -->
+<div class="section">
+  <div class="sec-label">DAX Measures Written</div>
+  <div class="dax-grid">
+    <div class="dax-card">
+      <div class="dax-name">Total Revenue</div>
+      <div class="dax-code">Total Revenue =<br>SUM(Sales_Transactions<br>[Total_Revenue_INR])</div>
+    </div>
+    <div class="dax-card">
+      <div class="dax-name">Gross Margin %</div>
+      <div class="dax-code">Gross Margin % =<br>DIVIDE([Gross Profit],<br>[Total Revenue], 0) * 100</div>
+    </div>
+    <div class="dax-card">
+      <div class="dax-name">SLA %</div>
+      <div class="dax-code">SLA % = DIVIDE(<br>COUNTROWS(FILTER(...,<br>"On-Time")), COUNTROWS(...))</div>
+    </div>
+    <div class="dax-card">
+      <div class="dax-name">Total Cylinders</div>
+      <div class="dax-code">Total Cylinders =<br>SUM(Sales_Transactions<br>[Quantity_Sold])</div>
+    </div>
+    <div class="dax-card">
+      <div class="dax-name">Gross Profit</div>
+      <div class="dax-code">Gross Profit =<br>SUM(Sales_Transactions<br>[Gross_Profit_INR])</div>
+    </div>
+    <div class="dax-card">
+      <div class="dax-name">Revenue vs Target</div>
+      <div class="dax-code">Rev vs Target =<br>[Total Revenue] -<br>SUM(Monthly_Targets[...])</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILES -->
+<div class="section">
+  <div class="sec-label">Project Files</div>
+  <div class="files-grid">
+    <div class="file-card">
+      <div class="file-icon">📊</div>
+      <div class="file-name">LPG_Dashboard.pbix</div>
+      <div class="file-desc">Power BI dashboard file with all visuals, measures and relationships</div>
+      <a class="file-btn" href="LPG_Dashboard.pbix" download>⬇ Download</a>
+    </div>
+    <div class="file-card">
+      <div class="file-icon">📁</div>
+      <div class="file-name">LPG_Sales_Data.xlsx</div>
+      <div class="file-desc">Excel dataset — 4 sheets, 3,287 rows, real business structure</div>
+      <a class="file-btn" href="LPG_Sales_Data.xlsx" download>⬇ Download</a>
+    </div>
+    <div class="file-card">
+      <div class="file-icon">🎨</div>
+      <div class="file-name">LPG_Dark_Navy_Theme.json</div>
+      <div class="file-desc">Custom Power BI dark navy theme — import directly</div>
+      <a class="file-btn" href="LPG_Dark_Navy_Theme.json" download>⬇ Download</a>
+    </div>
+    <div class="file-card">
+      <div class="file-icon">🖼️</div>
+      <div class="file-name">dashboard.png</div>
+      <div class="file-desc">Full resolution dashboard screenshot for portfolio</div>
+      <a class="file-btn" href="dashboard.png" download>⬇ Download</a>
+    </div>
+  </div>
+</div>
+
+<!-- RESUME ENTRY -->
+<div class="section">
+  <div class="sec-label">Resume Entry — Copy This Exactly</div>
+  <div class="resume-box">
+    <div class="resume-title">LPG Gas Sales Dashboard &nbsp;|&nbsp; <span style="color:#475569;font-weight:400;font-size:12px">Power BI · DAX · Excel · Power Query</span></div>
+    <div class="resume-tools" style="margin-bottom:10px;font-size:10px;color:#334155;font-family:'JetBrains Mono',monospace">
+      github.com/purviporwal09/lpg-gas-sales-dashboard &nbsp;·&nbsp; Mar 2026
+    </div>
+    <div class="resume-bullet">Built end-to-end sales analytics dashboard tracking ₹149.83M revenue across 6 zones, 10 dealers and 3 customer segments in Power BI Desktop</div>
+    <div class="resume-bullet">Cleaned and modelled 3,287 transaction records across 4 related tables using Power Query — changed data types, removed nulls and built table relationships</div>
+    <div class="resume-bullet">Wrote 6 DAX measures including Gross Margin %, SLA % and Revenue vs Target using SUM, DIVIDE, COUNTROWS and FILTER functions</div>
+    <div class="resume-bullet">Identified West zone as top revenue contributor at ₹27M and flagged Central zone SLA at 80% as a delivery inefficiency requiring route optimisation</div>
+    <div class="resume-bullet">Added 4 interactive slicers for Zone, Year, Customer Type and Quarter enabling dynamic cross-filtering across all 9 dashboard visuals</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">🔥 Purvi Porwal · Data Analyst · Power BI Portfolio · FY 2024-25</div>
+  <div class="footer-right">
+    <a class="footer-link" href="https://github.com/purviporwal09" target="_blank">GitHub</a>
+    <a class="footer-link" href="https://linkedin.com/in/purviporwal09" target="_blank">LinkedIn</a>
+    <a class="footer-link" href="LPG_Dashboard.pbix" download>Download .pbix</a>
+  </div>
+</footer>
+
 </body>
 </html>
-```
