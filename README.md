@@ -96,8 +96,7 @@ Sales_Transactions  →  Monthly_Targets  (on Zone + Month)
   winter demand pattern confirmed across 3 consecutive years
 - SLA improved from 80% in 2024 to 89% in 2026 — 
   shows operational improvement over time
-```
-
+---
 ## Files in This Repository
 
 | File | Description |
