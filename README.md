@@ -10,7 +10,7 @@
 ## Project Overview
 
 End-to-end Business Intelligence dashboard built in Power BI for an LPG gas distribution business.
-Covers **₹149.83M revenue** across **6 zones**, **10 dealers** and **3 customer segments** for FY 2024-25.
+covers ₹423M revenue across 3 years (2024-2026), 6 zones, 10 dealers and 3 customer segments
 
 ---
 
@@ -27,14 +27,14 @@ Covers **₹149.83M revenue** across **6 zones**, **10 dealers** and **3 custome
 
 ## Key Metrics
 
-| Metric | Value |
-|--------|-------|
-| Total Revenue | ₹149.83M |
-| Cylinders Sold | 81,473 |
-| Gross Margin % | 26.06% |
-| Delivery SLA % | 85.49% |
-| Active Dealers | 10 |
-| Zones Covered | 6 |
+| Metric         | Value           |
+|----------------|-----------------|
+| Total Revenue  | ₹423M (3-year)  |
+| Cylinders Sold | 2,22,000+       |
+| Gross Margin % | 26.06%          |
+| Delivery SLA % | 85.63%          |
+| Active Dealers | 10              |
+| Zones Covered  | 6               |
 
 ---
 
@@ -84,20 +84,26 @@ Sales_Transactions  →  Monthly_Targets  (on Zone + Month)
 
 ## Business Insights Found
 
-- **West zone** contributes highest revenue at ₹27M — leads all 6 zones
-- **Domestic segment** shows 20–25% volume spike during Nov–Feb winter months
-- **Central zone SLA** drops to ~80% — below 85% threshold, delivery route needs fixing
-- **Industrial 47.5kg** cylinders generate highest revenue per unit across all SKUs
-- **Revenue grew 12.4% YoY** — consistent growth across all zones
-
----
+- West zone leads all regions at ₹75M — consistently 
+  top performer across all 3 years
+- Revenue grew year on year from 2024 to 2026 — 
+  volume increased 30% and prices rose ~8% over 3 years
+- Central zone SLA at ~80% across all years — 
+  persistent delivery route problem, not a one-off issue
+- Industrial 47.5kg cylinders generate highest revenue 
+  per unit — margin opportunity across all 3 years
+- Domestic segment spikes 20-25% every Nov-Feb — 
+  winter demand pattern confirmed across 3 consecutive years
+- SLA improved from 80% in 2024 to 89% in 2026 — 
+  shows operational improvement over time
+```
 
 ## Files in This Repository
 
 | File | Description |
 |------|-------------|
 | `LPG Gas Sales Dashboard.pbix` | Power BI dashboard — open in Power BI Desktop |
-| `LPG_Sales_Data.xlsx` | Raw dataset — 4 sheets, 3,287 rows |
+| `LPG_Sales_Data.xlsx` | Raw dataset — 4 sheets, 9,049 rows across 2024-2026 |
 | `Theme.json` | Custom dark navy theme — import in Power BI |
 | `LPG_Gas_Sales_Dashboard.png` | Full resolution dashboard screenshot |
 | `index.html` | GitHub Pages live preview page |
